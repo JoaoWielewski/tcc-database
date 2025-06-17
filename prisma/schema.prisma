@@ -1,0 +1,46 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model historia {
+  id                 String   @id @default(cuid())
+  titulo             String
+  descricao          String
+  ee_td              Int
+  ee_ar              Int
+  se_td              Int
+  se_ar              Int
+  ce_td              Int
+  ce_ar              Int
+  ali_td             Int
+  ali_ar             Int
+  aie_td             Int
+  aie_ar             Int
+  comm_dados         Int?
+  proc_distribuido   Int?
+  performance        Int?
+  uso_config         Int?
+  volume_transacoes  Int?
+  entrada_online     Int?
+  eficiencia_usuario Int?
+  atualizacao_online Int?
+  proc_complexo      Int?
+  reusabilidade      Int?
+  facil_instalacao   Int?
+  facil_operacao     Int?
+  multiplos_locais   Int?
+  facil_mudanca      Int?
+  linguagem          String?
+  pf                 Int?
+  tempo_real         String?
+  tempo_pf           String?
+  criado_em          DateTime
+}
