@@ -11,36 +11,92 @@ datasource db {
 }
 
 model historia {
-  id                 String   @id @default(cuid())
-  titulo             String
-  descricao          String
-  ee_td              Int
-  ee_ar              Int
-  se_td              Int
-  se_ar              Int
-  ce_td              Int
-  ce_ar              Int
-  ali_td             Int
-  ali_ar             Int
-  aie_td             Int
-  aie_ar             Int
-  comm_dados         Int?
-  proc_distribuido   Int?
-  performance        Int?
-  uso_config         Int?
-  volume_transacoes  Int?
-  entrada_online     Int?
-  eficiencia_usuario Int?
-  atualizacao_online Int?
-  proc_complexo      Int?
-  reusabilidade      Int?
-  facil_instalacao   Int?
-  facil_operacao     Int?
-  multiplos_locais   Int?
-  facil_mudanca      Int?
-  linguagem          String?
-  pf                 Int?
-  tempo_real         String?
-  tempo_pf           String?
-  criado_em          DateTime
+  id               String   @id @default(cuid())
+  titulo           String
+  descricao        String
+  ee_td            Int?
+  ee_ar            Int?
+  se_td            Int?
+  se_ar            Int?
+  ce_td            Int?
+  ce_ar            Int?
+  ali_td           Int?
+  ali_ar           Int?
+  aie_td           Int?
+  aie_ar           Int?
+  pf               Int?
+  pcu              Int?
+  tempo_real       String?
+  tempo_pf         String?
+  tempo_pcu        String?
+  criado_em        DateTime
+  atores_simples   Int?
+  atores_medios    Int?
+  atores_complexos Int?
+  casos_simples    Int?
+  casos_medios     Int?
+  casos_complexos  Int?
+
+  equipeId  String
+  projetoId String
+
+  equipe  equipe  @relation(fields: [equipeId], references: [id], onDelete: Restrict, onUpdate: Cascade)
+  projeto projeto @relation(fields: [projetoId], references: [id], onDelete: Restrict, onUpdate: Cascade)
+
+  @@index([equipeId])
+  @@index([projetoId])
+}
+
+model projeto {
+  id                           String   @id @default(cuid())
+  titulo                       String
+  descricao                    String
+  comm_dados                   Int
+  proc_distribuido             Int
+  performance                  Int
+  uso_config                   Int
+  volume_transacoes            Int
+  entrada_online               Int
+  eficiencia_usuario           Int
+  atualizacao_online           Int
+  proc_complexo                Int
+  reusabilidade                Int
+  facil_instalacao             Int
+  facil_operacao               Int
+  multiplos_locais             Int
+  facil_mudanca                Int
+  sistema_distribuido          Int
+  requisitos_performance       Int
+  eficiencia_usuario_final     Int
+  complexidade_processamento   Int
+  reusabilidade_extra          Int
+  facilidade_instalacao_extra  Int
+  facilidade_uso               Int
+  portabilidade                Int
+  facilidade_mudancas          Int
+  conexoes_simultaneas         Int
+  requisitos_seguranca         Int
+  acesso_componentes_terceiros Int
+  treinamento_especializado    Int
+  linguagem                    String
+  criado_em                    DateTime
+
+  historias historia[]
+}
+
+model equipe {
+  id                        String   @id @default(cuid())
+  titulo                    String
+  descricao                 String
+  familiaridade_metodologia Int
+  experiencia_dominio       Int
+  experiencia_tecnologia    Int
+  estabilidade_requisitos   Int
+  experiencia_geral         Int
+  participacao_cliente      Int
+  motivacao_equipe          Int
+  pressao_prazos            Int
+  criado_em                 DateTime
+
+  historias historia[]
 }
