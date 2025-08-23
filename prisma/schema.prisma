@@ -82,6 +82,7 @@ model projeto {
   criado_em                    DateTime
 
   historias historia[]
+  equipe    equipe[]
 }
 
 model equipe {
@@ -97,6 +98,8 @@ model equipe {
   motivacao_equipe          Int
   pressao_prazos            Int
   criado_em                 DateTime
+  projetoId                 String
 
+  projeto   projeto    @relation(fields: [projetoId], references: [id], onDelete: Restrict, onUpdate: Cascade)
   historias historia[]
 }
