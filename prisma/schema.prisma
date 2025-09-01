@@ -26,7 +26,7 @@ model historia {
   aie_ar           Int?
   pf               Int?
   pcu              Int?
-  tempo_real       String?
+  tempo_real       Float?
   tempo_pf         String?
   tempo_pcu        String?
   criado_em        DateTime
