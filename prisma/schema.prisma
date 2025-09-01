@@ -79,6 +79,8 @@ model projeto {
   acesso_componentes_terceiros Int
   treinamento_especializado    Int
   linguagem                    String
+  tempo_horas_por_pf           Float?
+  tempo_horas_por_pcu          Float?
   criado_em                    DateTime
 
   historias historia[]
