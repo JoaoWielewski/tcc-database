@@ -39,12 +39,15 @@ model historia {
 
   equipeId  String
   projetoId String
+  usuarioId String
 
   equipe  equipe  @relation(fields: [equipeId], references: [id], onDelete: Restrict, onUpdate: Cascade)
   projeto projeto @relation(fields: [projetoId], references: [id], onDelete: Restrict, onUpdate: Cascade)
+  usuario usuario @relation(fields: [usuarioId], references: [id], onDelete: Restrict, onUpdate: Cascade)
 
   @@index([equipeId])
   @@index([projetoId])
+  @@index([usuarioId])
 }
 
 model projeto {
@@ -82,9 +85,13 @@ model projeto {
   tempo_horas_por_pf           Float?
   tempo_horas_por_pcu          Float?
   criado_em                    DateTime
+  usuarioId                    String
 
   historias historia[]
   equipe    equipe[]
+  usuario   usuario    @relation(fields: [usuarioId], references: [id], onDelete: Restrict, onUpdate: Cascade)
+
+  @@index([usuarioId])
 }
 
 model equipe {
@@ -104,4 +111,13 @@ model equipe {
 
   projeto   projeto    @relation(fields: [projetoId], references: [id], onDelete: Restrict, onUpdate: Cascade)
   historias historia[]
+}
+
+model usuario {
+  id        String     @id @default(cuid())
+  email     String
+  senha     String
+  criado_em DateTime
+  historia  historia[]
+  projeto   projeto[]
 }
